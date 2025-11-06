@@ -7,7 +7,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import { Text } from "react-native"
 import { useAuth } from "../context/AuthContext"
 
-// Screens
+
 import OnboardingScreen from "../screens/OnboardingScreen"
 import LoginScreen from "../screens/LoginScreen"
 import RegisterScreen from "../screens/RegisterScreen"
