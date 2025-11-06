@@ -1,22 +1,10 @@
 "use client"
 
-/**
- * STATE MANAGEMENT FILE - Complete State Management Setup for BorrowBox App
- *
- * This file consolidates all state management logic including:
- * - Authentication state (AuthContext)
- * - App state (AppContext with items, transactions, user profile)
- * - Local storage persistence
- *
- * Usage: Import useAuth() and useAppContext() hooks in any component
- */
 
 import { createContext, useContext, useState, type ReactNode } from "react"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 
-// ============================================================================
-// AUTHENTICATION STATE MANAGEMENT
-// ============================================================================
+
 
 export interface AuthUser {
   id: string
@@ -109,9 +97,7 @@ export function useAuth() {
   return context
 }
 
-// ============================================================================
-// APP STATE MANAGEMENT (Items, Transactions, User Profile)
-// ============================================================================
+
 
 export interface BorrowItem {
   id: string
