@@ -41,25 +41,25 @@ export interface UserProfile {
 }
 
 interface AppContextType {
-  // Items
+
   borrowItems: BorrowItem[]
   addBorrowItem: (item: BorrowItem) => void
   updateItemStatus: (itemId: string, status: "available" | "pending" | "borrowed") => void
 
-  // Transactions
+  
   transactions: Transaction[]
   addTransaction: (transaction: Transaction) => void
 
-  // User
+  
   userProfile: UserProfile
   updateUserProfile: (profile: Partial<UserProfile>) => void
   addCredits: (amount: number) => void
 
-  // Favorites
+  
   favoriteItems: string[]
   toggleFavorite: (itemId: string) => void
 
-  // Search history
+  
   searchHistory: string[]
   addSearchHistory: (query: string) => void
   clearSearchHistory: () => void
@@ -68,7 +68,7 @@ interface AppContextType {
 const AppContext = createContext<AppContextType | undefined>(undefined)
 
 export function AppProvider({ children }: { children: ReactNode }) {
-  // Initial mock data
+ 
   const INITIAL_ITEMS: BorrowItem[] = [
     {
       id: "1",
@@ -187,14 +187,14 @@ export function AppProvider({ children }: { children: ReactNode }) {
     memberSince: "January 2024",
   }
 
-  // State
+  
   const [borrowItems, setBorrowItems] = useState<BorrowItem[]>(INITIAL_ITEMS)
   const [transactions, setTransactions] = useState<Transaction[]>(INITIAL_TRANSACTIONS)
   const [userProfile, setUserProfile] = useState<UserProfile>(INITIAL_USER)
   const [favoriteItems, setFavoriteItems] = useState<string[]>(["1", "4"])
   const [searchHistory, setSearchHistory] = useState<string[]>([])
 
-  // Items functions
+  
   const addBorrowItem = (item: BorrowItem) => {
     setBorrowItems([...borrowItems, item])
     saveToStorage("borrowItems", [...borrowItems, item])
@@ -206,13 +206,13 @@ export function AppProvider({ children }: { children: ReactNode }) {
     saveToStorage("borrowItems", updated)
   }
 
-  // Transaction functions
+  
   const addTransaction = (transaction: Transaction) => {
     setTransactions([...transactions, transaction])
     saveToStorage("transactions", [...transactions, transaction])
   }
 
-  // User functions
+  
   const updateUserProfile = (profile: Partial<UserProfile>) => {
     const updated = { ...userProfile, ...profile }
     setUserProfile(updated)
@@ -225,7 +225,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     saveToStorage("userProfile", updated)
   }
 
-  // Favorite functions
+  
   const toggleFavorite = (itemId: string) => {
     const updated = favoriteItems.includes(itemId)
       ? favoriteItems.filter((id) => id !== itemId)
@@ -234,7 +234,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     saveToStorage("favoriteItems", updated)
   }
 
-  // Search history functions
+  
   const addSearchHistory = (query: string) => {
     if (query.trim()) {
       const updated = [query, ...searchHistory.filter((h) => h !== query)].slice(0, 10)
@@ -248,7 +248,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     saveToStorage("searchHistory", [])
   }
 
-  // Storage helper
+  
   const saveToStorage = async (key: string, value: any) => {
     try {
       await AsyncStorage.setItem(key, JSON.stringify(value))
